@@ -17,7 +17,10 @@ export function useHomeFetch() {
       // console.log(result);
       setState((prevState) => ({
         ...prevState,
-        movies: isLoadMore !== -1 ? [result.results] : [...result.results],
+        movies:
+          isLoadMore !== -1
+            ? [...prevState.movies, ...result.results]
+            : [...result.results],
         heroImage: prevState.heroImage || result.results[0],
         currentPage: result.page,
         totalPages: result.total_pages,

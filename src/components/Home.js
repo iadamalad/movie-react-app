@@ -27,12 +27,13 @@ function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   if (error) return <div>Something went wrong!</div>;
   if (!state.movies[0]) return <Spinner />;
+
   const loadMoreMovies = () => {
-    const searchEndpoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${SEARCH_TERM}&page=${
-      currentPage + 1
+    const searchEndpoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${
+      state.currentPage + 1
     }`;
     const popularEndpoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${
-      currentPage + 1
+      state.currentPage + 1
     }`;
 
     const endPoint = searchTerm ? searchEndpoint : popularEndpoint;
@@ -62,7 +63,9 @@ function Home() {
         ))}
       </Grid>
       {loading && <Spinner />}
-      <LoadMoreBtn text="Load More" callback={loadMoreMovies} />
+      {state.currentPage < state.totalPages && !loading && (
+        <LoadMoreBtn text="Load More" callback={loadMoreMovies} />
+      )}
     </>
   );
 }
