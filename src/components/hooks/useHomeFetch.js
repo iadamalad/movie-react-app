@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_URL, API_KEY } from "../../config";
+import { POPULAR_ENDPOINT } from "../../config";
 
 export function useHomeFetch() {
   const [state, setState] = useState({ movies: [] });
@@ -33,7 +33,7 @@ export function useHomeFetch() {
   };
 
   useEffect(() => {
-    fetchMovies(`${API_URL}movie/popular?api_key=${API_KEY}`);
+    fetchMovies(`${POPULAR_ENDPOINT}`);
   }, []);
 
   return [{ state, loading, error }, fetchMovies];

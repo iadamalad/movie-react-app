@@ -1,6 +1,9 @@
 import React from "react";
+import { Router } from "@reach/router";
 import Header from "./elements/Header.js";
 import Home from "./Home.js";
+import NotFound from "./NotFound.js";
+import Movie from "./Movie.js";
 import { GlobalStyle } from "./styles/GlobalStyle.js";
 
 ///JSX is syntatical sugar for React.createElement
@@ -13,7 +16,13 @@ const App = function () {
   return (
     <>
       <Header />
-      <Home />
+      <Router>
+        <Home path="/" />
+        {/* Movie component shows when we go to the path that has the param movieID */}
+        <Movie path="/:movieID" />
+        <NotFound default />
+      </Router>
+
       <GlobalStyle />
     </>
   );

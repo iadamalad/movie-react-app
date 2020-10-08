@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
-  API_URL,
-  API_KEY,
   IMAGE_BASE_URL,
   POSTER_SIZE,
   BACKDROP_SIZE,
+  SEARCH_ENDPOINT,
+  POPULAR_ENDPOINT,
 } from "../config.js";
 
 import Header from "./elements/Header";
@@ -28,25 +28,34 @@ function Home() {
   if (error) return <div>Something went wrong!</div>;
   if (!state.movies[0]) return <Spinner />;
 
+  const searchMovies = (search) => {
+    const endpoint = search ? SEARCH_ENDPOINT + search : POPULAR_ENDPOINT;
+    setSearchTerm(search);
+    fetchMovies(endpoint);
+  };
+
   const loadMoreMovies = () => {
-    const searchEndpoint = `${API_URL}search/movie?api_key=${API_KEY}&query=${searchTerm}&page=${
-      state.currentPage + 1
-    }`;
-    const popularEndpoint = `${API_URL}movie/popular?api_key=${API_KEY}&page=${
+    const searchEndpoint = `${SEARCH_ENDPOINT}${searchTerm}&page=${
       state.currentPage + 1
     }`;
 
+    const popularEndpoint = `${POPULAR_ENDPOINT}&page=${state.currentPage + 1}`;
+
     const endPoint = searchTerm ? searchEndpoint : popularEndpoint;
+
     fetchMovies(endPoint);
   };
   return (
     <>
-      <HeroImage
-        image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.heroImage.backdrop_path}`}
-        title={state.heroImage.original_title}
-        text={state.heroImage.overview}
-      />
-      <SearchBar />
+      {!searchTerm && (
+        <HeroImage
+          image={`${IMAGE_BASE_URL}${BACKDROP_SIZE}${state.heroImage.backdrop_path}`}
+          title={state.heroImage.original_title}
+          text={state.heroImage.overview}
+        />
+      )}
+
+      <SearchBar callback={searchMovies} />
       <Grid header={searchTerm ? "Search Result" : "Popular Movies"}>
         {state.movies.map((movie) => (
           <MovieThumb
