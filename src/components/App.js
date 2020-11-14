@@ -13,6 +13,7 @@ import { GlobalStyle } from "./styles/GlobalStyle.js";
 //You can nest components just like html
 //Nested content can be accessed in props.children
 const App = function () {
+
   return (
     <>
       <Header />
