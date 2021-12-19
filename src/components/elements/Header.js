@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "@reach/router";
-import RMDBLogo from "../images/reactMovie_logo.png";
+import RMDBLogo from "../images/ProMovLogo.png";
 import TMDBLogo from "../images/tmdb_logo.svg";
 
 //1-how to create styled components

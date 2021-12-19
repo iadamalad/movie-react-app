@@ -8,7 +8,7 @@ export const StyledHeader = styled.div`
   .header-content {
     max-width: 1280px;
     min-height: 120px;
-    padding: 20px 0px;
+    padding: 1img0px 0px;
     margin: 0 auto;
     box-sizing: border-box;
 
@@ -21,7 +21,7 @@ export const StyledHeader = styled.div`
 
 export const StyledRMDBLogo = styled.img`
   width: 250px;
-  margin-top: 20px;
+  margin-top: 10px;
 
   @media screen and (max-width: 500px) {
     width: 150px;
@@ -37,6 +37,6 @@ export const StyledTMDBLogo = styled.img`
   @media screen and (max-width: 500px) {
     display: inline-block;
     width: 80px;
-    margin-top: 0px;
+    margin-top: 6px;
   }
 `;
